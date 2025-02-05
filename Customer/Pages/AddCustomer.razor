@@ -1,0 +1,58 @@
+﻿@page "/add-customer"
+@inject CustomerService CustomerService
+@inject NavigationManager Navigation
+
+<h3>Add Customer</h3>
+
+<form @onsubmit="HandleFormSubmit">
+    <div class="mb-3">
+        <label class="form-label">Name</label>
+        <input type="text" class="form-control" @bind="newCustomer.CustomernName" required />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Email</label>
+        <input type="email" class="form-control" @bind="newCustomer.Email" required />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Password</label>
+        <input type="password" class="form-control" @bind="newCustomer.password" required />
+    </div>
+
+    <button type="submit" class="btn btn-success">Submit</button>
+    <button type="button" class="btn btn-secondary ms-2" @onclick="NavigateBack">Cancel</button>
+</form>
+
+@if (errorMessage != null)
+{
+    <p class="text-danger">@errorMessage</p>
+}
+
+@code {
+    private CustomerModel newCustomer = new();
+    private string? errorMessage;
+
+    private async Task HandleFormSubmit()
+    {
+        await AddCustomernew();
+    }
+
+    private async Task AddCustomernew()
+    {
+        try
+        {
+            await CustomerService.AddCustomerAsync(newCustomer);
+            Navigation.NavigateTo("/");
+        }
+        catch (Exception ex)
+        {
+            errorMessage = $"Error adding customer: {ex.Message}";
+        }
+    }
+
+    private void NavigateBack()
+    {
+        Navigation.NavigateTo("/");
+    }
+}
