@@ -15,7 +15,7 @@ public class CustomerService
     {
         try
         {
-            return await _httpClient.GetFromJsonAsync<List<CustomerModel>>("https://localhost:7085/api/Customer") ?? new List<CustomerModel>();
+            return await _httpClient.GetFromJsonAsync<List<CustomerModel>>("https://localhost:7241/api/Customer") ?? new List<CustomerModel>();
         }
         catch (Exception ex)
         {
@@ -29,7 +29,7 @@ public class CustomerService
     {
         try
         {
-            return await _httpClient.GetFromJsonAsync<CustomerModel>($"https://localhost:7085/api/Customer/{id}");
+            return await _httpClient.GetFromJsonAsync<CustomerModel>($"https://localhost:7241/api/Customer/{id}");
         }
         catch (Exception ex)
         {
@@ -43,7 +43,7 @@ public class CustomerService
     {
         try
         {
-            var response = await _httpClient.PostAsJsonAsync("https://localhost:7085/api/Customer", customer);
+            var response = await _httpClient.PostAsJsonAsync("https://localhost:7241/api/Customer", customer);
             return response.IsSuccessStatusCode;
         }
         catch (Exception ex)
@@ -58,7 +58,7 @@ public class CustomerService
     {
         try
         {
-            var response = await _httpClient.PutAsJsonAsync("https://localhost:7085/api/Customer", customer);
+            var response = await _httpClient.PutAsJsonAsync("https://localhost:7241/api/Customer", customer);
             return response.IsSuccessStatusCode;
         }
         catch (Exception ex)
@@ -73,7 +73,7 @@ public class CustomerService
     {
         try
         {
-            var response = await _httpClient.DeleteAsync($"https://localhost:7085/api/Customer/{id}");
+            var response = await _httpClient.DeleteAsync($"https://localhost:7241/api/Customer/{id}");
             return response.IsSuccessStatusCode;
         }
         catch (Exception ex)
@@ -84,7 +84,7 @@ public class CustomerService
     }
     public async Task AddCustomernewAsync(CustomerModel customer)
     {
-        var response = await _httpClient.PostAsJsonAsync("https://localhost:7085/api/Customer", customer);
+        var response = await _httpClient.PostAsJsonAsync("https://localhost:7241/api/Customer", customer);
         response.EnsureSuccessStatusCode();
     }
     //public async Task DeleteCustomerAsync(string customerId)
